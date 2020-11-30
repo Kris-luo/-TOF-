@@ -1,0 +1,32 @@
+import numpy as np 
+
+def particles_sum(m,loading):
+
+     Nt = 16 * np.array(m) **3 - 33 * np.array(m)**2 + 24* np.array(m) - 6 
+     Np = 20 / 1024 *loading / 195.084 /1000 * (6.02* 10 ** 23)/ Nt 
+     sum_N_111 = 8*(3*np.array(m)**2 - 9 * np.array(m) + 7)* Np
+     sum_N_100 = 6*(np.array(m)-2)**2 * Np
+     sum_N_corner = 24 * Np * 1000
+     sum_N_edge = 36*(np.array(m)-2) * Np
+     sum_Ns = (30 * np.array(m) ** 2 - 60 * np.array(m) + 32)* Np
+     #N_111_permole = sum_N_111/(25 / 1030 *loading / 195.084)
+     
+     return sum_N_111, sum_N_100, sum_N_corner, sum_N_edge,sum_Ns
+
+def TOF_caculation(r,N_111,N_100,N_edge,N_corner):
+     tof_111 = np.array(r)/np.array(N_111).real
+     tof_100 = np.array(r)/np.array(N_100).real
+     tof_edge = np.array(r)/np.array(N_edge).real
+     tof_corner = np.array(r)/np.array(N_corner)/(1.6*10**(-19))
+     return tof_111, tof_100,tof_edge, tof_corner
+
+def Normalized_TOF(tof_111, tof_100, tof_edge, tof_corner):
+     tof_111_max = max(tof_111)
+     Normalized_TOF_111 = np.array(tof_111)/tof_111_max
+     tof_100_max = max(tof_100)
+     Normalized_TOF_100 = np.array(tof_100)/tof_100_max
+     tof_edge_max = max(tof_edge)
+     Normalized_TOF_edge = np.array(tof_edge)/tof_edge_max
+     tof_corner_max = max(tof_corner)
+     Normalized_TOF_corner = np.array(tof_corner)/tof_corner_max
+     return Normalized_TOF_111, Normalized_TOF_100, Normalized_TOF_edge, Normalized_TOF_corner
