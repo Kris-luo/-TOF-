@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt 
 
-from 晶面计算配合numpy import *
+from 晶面原子数计算import *
 
 
 #---------------------晶面原子数与粒径关系图————————————————————————————————————————————————————————————————
